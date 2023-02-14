@@ -1,32 +1,24 @@
-import React, { useState } from "react";
-import api from "../api";
+import React from "react";
+import User from "./user";
 
-const Users = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
-
-  const handleDelete = (userId) =>
-    setUsers(users.filter((user) => user._id !== userId));
-
-  const renderPhrase = (number) => {
-    const lastOne = Number(number.toString().slice(-1));
-    if (number > 4 && number < 15) return "человек тусанет";
-    if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанут";
-    if (lastOne === 1) return "человек тусанет";
-    return "человек тусанет";
-  };
+const Users = (props) => {
+  /*
+  props = {
+    onDelete: (user.id => ...),
+    onToggleBookMark:   id => ...,
+    users: [
+      {_id: '2342re', name: "Джон Дориан", profession: professions.doctor},
+      {_id: '223423342re', name: "н Дориан", profession: professions.doctor},
+      {_id: '2sf23r342re', name: "жон Дориан", profession: professions.waiter},
+      {_id: '234324fdsaf2re', name: "Джо Дориан", profession: professions.doctor},
+      {_id: '234324f3423dsaf2re', name: "Джоff Дориан", profession: professions.waiter},
+    ]
+  }
+  */
 
   return (
     <>
-      <h2>
-        <span
-          className={"badge bg-" + (users.length > 0 ? "primary" : "danger")}
-        >
-          {users.length > 0
-            ? `${users.length} ${renderPhrase(users.length)} с тобой сегодня`
-            : "Никто не тусанет с тобой"}
-        </span>
-      </h2>
-      {users.length > 0 && (
+      {props.users.length > 0 && (
         <table className="table">
           <thead>
             <tr>
@@ -35,34 +27,23 @@ const Users = () => {
               <th>Профессия</th>
               <th>Встретился, раз</th>
               <th>Оценка</th>
+              <th>Избранное</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>
-                  {user.qualities.map((qualitie) => (
-                    <span
-                      className={"badge m-1 bg-" + qualitie.color}
-                      key={qualitie._id}
-                    >
-                      {qualitie.name}
-                    </span>
-                  ))}
-                </td>
-                <td>{user.profession.name}</td>
-                <td>{user.completedMeetings}</td>
-                <td>{user.rate}/5</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDelete(user._id)}
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
+            {props.users.map((user) => (
+              <User
+                key={user._id}
+                // {...user}
+                name={user.name}
+                qualities={user.qualities}
+                profession={user.profession}
+                completedMeetings={user.completedMeetings}
+                rate={user.rate}
+                id={user._id}
+                onDelete={props.onDelete}
+                onToggleBookMark={props.onToggleBookMark}
+              />
             ))}
           </tbody>
         </table>
