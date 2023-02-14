@@ -13,6 +13,8 @@ const User = ({
   onToggleBookMark,
   bookmark,
 }) => {
+  console.log(id);
+
   return (
     <tr>
       <td>{name}</td>

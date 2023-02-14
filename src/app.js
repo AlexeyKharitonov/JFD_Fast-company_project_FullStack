@@ -10,6 +10,8 @@ const App = () => {
     setUsers(users.filter((user) => user._id !== userId));
 
   const handleToggleBookMark = (id) => {
+    console.log(id);
+
     setUsers((prevState) =>
       prevState.map((user) =>
         user._id === id ? { ...user, bookmark: !user.bookmark } : user

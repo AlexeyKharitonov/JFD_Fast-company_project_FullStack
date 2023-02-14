@@ -34,7 +34,7 @@ const Users = (props) => {
             {props.users.map((user) => (
               <User
                 key={user._id}
-                // {...user}
+                {...user}
                 name={user.name}
                 qualities={user.qualities}
                 profession={user.profession}
