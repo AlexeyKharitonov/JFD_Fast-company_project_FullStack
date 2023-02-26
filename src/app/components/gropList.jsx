@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function GropList({
+const GropList = ({
     items,
     valueProperty,
     contentProperty,
     onItemSelect,
     selectedItem
-}) {
+}) => {
     // console.log(Object.keys(items));
     return (
         <ul className="list-group">
@@ -26,17 +26,17 @@ function GropList({
             ))}
         </ul>
     );
-}
+};
 GropList.defaultProps = {
     valueProperty: "_id",
     contentProperty: "name"
 };
 GropList.propTypes = {
-    items: PropTypes.object.isRequired,
+    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     valueProperty: PropTypes.string.isRequired,
     contentProperty: PropTypes.string.isRequired,
     onItemSelect: PropTypes.func.isRequired,
-    selectedItem: PropTypes.object.isRequired
+    selectedItem: PropTypes.object
 };
 
 export default GropList;

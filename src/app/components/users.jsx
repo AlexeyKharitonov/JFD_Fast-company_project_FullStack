@@ -6,15 +6,15 @@ import User from "./user";
 import api from "../api";
 import GropList from "./gropList";
 import SearchStatus from "./searchStatus";
+import { compareArrays } from "../utils/comparingArrays";
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
-    const pageSize = 4;
+    const pageSize = 2;
+
     useEffect(() => {
-        api.professions
-            .fetchAll()
-            .then((data) => setProfessions(Object.assign(data)));
+        api.professions.fetchAll().then((data) => setProfessions(data));
     }, []);
     useEffect(() => {
         setCurrentPage(1);
@@ -29,8 +29,13 @@ const Users = ({ users: allUsers, ...rest }) => {
     };
 
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) => user.profession === selectedProf)
+        ? allUsers.filter((user) =>
+              compareArrays(user.profession, selectedProf)
+                  ? user.profession
+                  : ""
+          )
         : allUsers;
+
     const count = filteredUsers.length;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
     const clearFilter = () => {
@@ -56,7 +61,6 @@ const Users = ({ users: allUsers, ...rest }) => {
             )}
             <div className="d-flex flex-column">
                 <SearchStatus length={count} />
-
                 {count > 0 && (
                     <table className="table">
                         <thead>
@@ -90,7 +94,7 @@ const Users = ({ users: allUsers, ...rest }) => {
     );
 };
 Users.propTypes = {
-    users: PropTypes.array.isRequired
+    users: PropTypes.array
 };
 
 export default Users;
