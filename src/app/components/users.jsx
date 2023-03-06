@@ -29,10 +29,10 @@ const Users = ({ users: allUsers, ...rest }) => {
     };
 
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) =>
-              compareArrays(user.profession, selectedProf)
-                  ? user.profession
-                  : ""
+        ? allUsers.filter(
+              (user) => compareArrays(user.profession, selectedProf)
+              //   ? user.profession
+              //   : ""
           )
         : allUsers;
 
