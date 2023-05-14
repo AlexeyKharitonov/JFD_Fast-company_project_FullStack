@@ -25,7 +25,12 @@ const Comment = ({
         <div className="bg-light card-body  mb-3">
             <div className="row">
                 {isLoading ? (
-                    "Loading"
+                    <div
+                        className="badge text-bg-secondary"
+                        style={{ display: "", maxWidth: "150px" }}
+                    >
+                        Loading
+                    </div>
                 ) : (
                     <div className="col">
                         <div className="d-flex flex-start ">

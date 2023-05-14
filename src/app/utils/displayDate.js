@@ -21,9 +21,11 @@ export function displayDate(data) {
                 }
                 return "30 мин назад";
             }
-            return `${date.getHours()}:${date.getMinutes()}`;
+            return `сегодня в ${addZero(date.getHours())}:${addZero(
+                date.getMinutes()
+            )}`;
         }
-        return `${date.getDate()} ${date.toLocaleString("default", {
+        return `${addZero(date.getDate())} ${date.toLocaleString("default", {
             month: "long"
         })}`;
     }
