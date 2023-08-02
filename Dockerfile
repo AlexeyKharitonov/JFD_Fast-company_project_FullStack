@@ -11,7 +11,6 @@ COPY client /app/client
 RUN npm run build
 
 
-
 FROM node:16-alpine
 
 WORKDIR /app
@@ -26,4 +25,4 @@ COPY --from=client /app/client/build /app/client
 
 EXPOSE 8080
 
-CMD [ "npm","start" ]
+CMD [ "npm", "start" ]

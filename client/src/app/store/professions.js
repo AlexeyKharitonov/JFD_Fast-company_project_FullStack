@@ -4,7 +4,7 @@ import professionService from "../services/profession.service";
 const professionsSlice = createSlice({
     name: "professions",
     initialState: {
-        entities: null,
+        entities: [],
         isLoading: true,
         errors: null,
         lastFetch: null
@@ -55,7 +55,7 @@ export const getPeofessionsLoadingStatus = () => (state) =>
 
 export const getProfessionsByIds = (professionId) => (state) => {
     const profs = state.professions.entities;
-    if (profs) {
+    if (profs.length) {
         return profs.find((obj) => obj._id === professionId);
     }
 };
