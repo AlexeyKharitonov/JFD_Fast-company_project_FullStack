@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/cross-env/src/index.js NODE_ENV=production node app.js",
-    "serve": "node ./node_modules/cross-env/src/index.js NODE_ENV=development nodemon app.js"
+    "start": "cross-env NODE_ENV=production node app.js",
+    "serve": "cross-env NODE_ENV=development nodemon app.js"
   },
   "author": "",
   "license": "ISC",
